@@ -468,7 +468,13 @@ namespace {
             {
                 // Take some extra time if the best move has changed
                 if (depth > 4 * ONE_PLY && multiPV == 1)
-                    Time.pv_instability(BestMoveChanges);
+                     {
+		   double dt =    RootMoves[0].score > PawnValueEg * 75 / 100
+            && RootMoves[0].score < PawnValueEg * 154 / 100 ? 0.12 : 0.0;
+Time.pv_instability(BestMoveChanges + dt);
+
+                  }
+ 
 
                 // Stop the search if only one legal move is available or all
                 // of the available time has been used or we matched an easyMove
